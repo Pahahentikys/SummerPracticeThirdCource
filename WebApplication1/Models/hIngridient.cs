@@ -23,6 +23,7 @@ namespace WebApplication1.Models
     
         public int IngridientId { get; set; }
         public string IngridientName { get; set; }
+        public bool Exist { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<hDishComposition> hDishComposition { get; set; }

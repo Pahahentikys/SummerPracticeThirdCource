@@ -17,7 +17,7 @@ namespace WebApplication1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public hPersonal()
         {
-            this.hDish = new HashSet<hDish>();
+            this.jDish = new HashSet<jDish>();
             this.jReceipt = new HashSet<jReceipt>();
         }
     
@@ -25,9 +25,10 @@ namespace WebApplication1.Models
         public string PersonFlN { get; set; }
         public decimal PersonCost1H { get; set; }
         public System.DateTime PersonDate { get; set; }
+        public bool Exist { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<hDish> hDish { get; set; }
+        public virtual ICollection<jDish> jDish { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<jReceipt> jReceipt { get; set; }
     }

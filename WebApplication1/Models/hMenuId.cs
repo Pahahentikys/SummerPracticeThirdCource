@@ -17,15 +17,16 @@ namespace WebApplication1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public hMenuId()
         {
-            this.jMenu = new HashSet<jMenu>();
+            this.jMenuComposition = new HashSet<jMenuComposition>();
             this.jReceiptPosition = new HashSet<jReceiptPosition>();
         }
     
         public int MenuId { get; set; }
         public Nullable<System.DateTime> MenuDate { get; set; }
+        public bool Exist { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<jMenu> jMenu { get; set; }
+        public virtual ICollection<jMenuComposition> jMenuComposition { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<jReceiptPosition> jReceiptPosition { get; set; }
     }

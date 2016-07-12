@@ -14,14 +14,29 @@ namespace WebApplication1.Models
     
     public partial class hDish
     {
-        public int DishId { get; set; }
-        public int PersonId { get; set; }
-        public System.DateTime DishCreateDate { get; set; }
-        public float HumanHoursAmount { get; set; }
-        public int id { get; set; }
-        public Nullable<decimal> DishCost { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public hDish()
+        {
+            this.jDish = new HashSet<jDish>();
+            this.hDishComposition = new HashSet<hDishComposition>();
+            this.jMenuComposition = new HashSet<jMenuComposition>();
+            this.jDishWarehouse = new HashSet<jDishWarehouse>();
+            this.jReceiptPosition = new HashSet<jReceiptPosition>();
+        }
     
-        public virtual hDishId hDishId { get; set; }
-        public virtual hPersonal hPersonal { get; set; }
+        public int DishId { get; set; }
+        public string DishName { get; set; }
+        public bool Exist { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<jDish> jDish { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<hDishComposition> hDishComposition { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<jMenuComposition> jMenuComposition { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<jDishWarehouse> jDishWarehouse { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<jReceiptPosition> jReceiptPosition { get; set; }
     }
 }

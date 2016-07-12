@@ -12,13 +12,17 @@ namespace WebApplication1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class jMenu
+    public partial class jDish
     {
-        public int MenuId { get; set; }
         public int DishId { get; set; }
-        public int id { get; set; }
+        public int PersonId { get; set; }
+        public System.DateTime DishCreateDate { get; set; }
+        public float HumanHoursAmount { get; set; }
+        public int jDishId { get; set; }
+        public Nullable<decimal> DishCost { get; set; }
+        public bool Exist { get; set; }
     
-        public virtual hDishId hDishId { get; set; }
-        public virtual hMenuId hMenuId { get; set; }
+        public virtual hDish hDish { get; set; }
+        public virtual hPersonal hPersonal { get; set; }
     }
 }

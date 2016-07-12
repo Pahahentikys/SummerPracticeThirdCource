@@ -4,40 +4,32 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище KOMK_v6Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище KOMK_v6Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="hCashBox">
           <Key>
             <PropertyRef Name="CashBoxId" />
           </Key>
           <Property Name="CashBoxId" Type="int" Nullable="false" />
           <Property Name="CashBoxModel" Type="nvarchar" MaxLength="20" />
+          <Property Name="Exist" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="hDish">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="DishId" Type="int" Nullable="false" />
-          <Property Name="PersonId" Type="int" Nullable="false" />
-          <Property Name="DishCreateDate" Type="datetime" Nullable="false" />
-          <Property Name="HumanHoursAmount" Type="real" Nullable="false" />
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DishCost" Type="money" />
-        </EntityType>
-        <EntityType Name="hDishComposition">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="DishId" Type="int" Nullable="false" />
-          <Property Name="IngridientId" Type="int" Nullable="false" />
-          <Property Name="IngridientAmount" Type="int" Nullable="false" />
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-        </EntityType>
-        <EntityType Name="hDishId">
           <Key>
             <PropertyRef Name="DishId" />
           </Key>
           <Property Name="DishId" Type="int" Nullable="false" />
           <Property Name="DishName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Exist" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="hDishComposition">
+          <Key>
+            <PropertyRef Name="DishCompositionId" />
+          </Key>
+          <Property Name="DishId" Type="int" Nullable="false" />
+          <Property Name="IngridientId" Type="int" Nullable="false" />
+          <Property Name="IngridientAmount" Type="int" Nullable="false" />
+          <Property Name="DishCompositionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Exist" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="hIngridient">
           <Key>
@@ -45,6 +37,7 @@
           </Key>
           <Property Name="IngridientId" Type="int" Nullable="false" />
           <Property Name="IngridientName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Exist" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="hMenuId">
           <Key>
@@ -52,6 +45,7 @@
           </Key>
           <Property Name="MenuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MenuDate" Type="date" />
+          <Property Name="Exist" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="hPersonal">
           <Key>
@@ -61,33 +55,49 @@
           <Property Name="PersonFlN" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PersonCost1H" Type="money" Nullable="false" />
           <Property Name="PersonDate" Type="date" Nullable="false" />
+          <Property Name="Exist" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="jDish">
+          <Key>
+            <PropertyRef Name="jDishId" />
+          </Key>
+          <Property Name="DishId" Type="int" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="DishCreateDate" Type="datetime" Nullable="false" />
+          <Property Name="HumanHoursAmount" Type="real" Nullable="false" />
+          <Property Name="jDishId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DishCost" Type="money" />
+          <Property Name="Exist" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="jDishWarehouse">
+          <Key>
+            <PropertyRef Name="DishWarehouseId" />
+          </Key>
+          <Property Name="DishId" Type="int" Nullable="false" />
+          <Property Name="DishAmount" Type="int" Nullable="false" />
+          <Property Name="DishWarehouseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DishDate" Type="datetime" />
+          <Property Name="Exist" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="jEntrancePosition">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="EntrancePositionId" />
           </Key>
           <Property Name="EntranceId" Type="int" Nullable="false" />
           <Property Name="IngridientId" Type="int" />
           <Property Name="IngridientCost" Type="money" />
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntrancePositionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EntranceDateTime" Type="datetime" />
-        </EntityType>
-        <EntityType Name="jMenu">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="MenuId" Type="int" Nullable="false" />
-          <Property Name="DishId" Type="int" Nullable="false" />
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Exist" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="jMenuComposition">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="MenuCompositionId" />
           </Key>
+          <Property Name="MenuId" Type="int" Nullable="false" />
           <Property Name="DishId" Type="int" Nullable="false" />
-          <Property Name="DishAmount" Type="int" Nullable="false" />
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DishDate" Type="datetime" />
+          <Property Name="MenuCompositionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Exist" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="jReceipt">
           <Key>
@@ -98,17 +108,19 @@
           <Property Name="ReceiptCashBoxId" Type="int" Nullable="false" />
           <Property Name="PersonId" Type="int" Nullable="false" />
           <Property Name="ReceiptDateTime" Type="datetime" Nullable="false" />
+          <Property Name="Exist" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="jReceiptPosition">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="ReceiptPositionId" />
           </Key>
           <Property Name="ReceiptId" Type="int" Nullable="false" />
           <Property Name="DishId" Type="int" Nullable="false" />
           <Property Name="DishAmount" Type="int" Nullable="false" />
           <Property Name="DishCost" Type="money" Nullable="false" />
           <Property Name="MenuId" Type="int" Nullable="false" />
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReceiptPositionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Exist" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -121,34 +133,34 @@
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_hDish_hDishId">
-          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
-          <End Role="hDish" Type="Self.hDish" Multiplicity="*" />
+          <End Role="hDish" Type="Self.hDish" Multiplicity="1" />
+          <End Role="jDish" Type="Self.jDish" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="hDishId">
+            <Principal Role="hDish">
               <PropertyRef Name="DishId" />
             </Principal>
-            <Dependent Role="hDish">
+            <Dependent Role="jDish">
               <PropertyRef Name="DishId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_hDish_hPersonal">
           <End Role="hPersonal" Type="Self.hPersonal" Multiplicity="1" />
-          <End Role="hDish" Type="Self.hDish" Multiplicity="*" />
+          <End Role="jDish" Type="Self.jDish" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="hPersonal">
               <PropertyRef Name="PersonId" />
             </Principal>
-            <Dependent Role="hDish">
+            <Dependent Role="jDish">
               <PropertyRef Name="PersonId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_hDishComposition_hDishId">
-          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
+          <End Role="hDish" Type="Self.hDish" Multiplicity="1" />
           <End Role="hDishComposition" Type="Self.hDishComposition" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="hDishId">
+            <Principal Role="hDish">
               <PropertyRef Name="DishId" />
             </Principal>
             <Dependent Role="hDishComposition">
@@ -181,37 +193,37 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_jMenu_hDishId">
-          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
-          <End Role="jMenu" Type="Self.jMenu" Multiplicity="*" />
+          <End Role="hDish" Type="Self.hDish" Multiplicity="1" />
+          <End Role="jMenuComposition" Type="Self.jMenuComposition" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="hDishId">
+            <Principal Role="hDish">
               <PropertyRef Name="DishId" />
             </Principal>
-            <Dependent Role="jMenu">
+            <Dependent Role="jMenuComposition">
               <PropertyRef Name="DishId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_jMenu_hMenuId">
           <End Role="hMenuId" Type="Self.hMenuId" Multiplicity="1" />
-          <End Role="jMenu" Type="Self.jMenu" Multiplicity="*" />
+          <End Role="jMenuComposition" Type="Self.jMenuComposition" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="hMenuId">
               <PropertyRef Name="MenuId" />
             </Principal>
-            <Dependent Role="jMenu">
+            <Dependent Role="jMenuComposition">
               <PropertyRef Name="MenuId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_jMenuComposition_hDishId">
-          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
-          <End Role="jMenuComposition" Type="Self.jMenuComposition" Multiplicity="*" />
+          <End Role="hDish" Type="Self.hDish" Multiplicity="1" />
+          <End Role="jDishWarehouse" Type="Self.jDishWarehouse" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="hDishId">
+            <Principal Role="hDish">
               <PropertyRef Name="DishId" />
             </Principal>
-            <Dependent Role="jMenuComposition">
+            <Dependent Role="jDishWarehouse">
               <PropertyRef Name="DishId" />
             </Dependent>
           </ReferentialConstraint>
@@ -241,10 +253,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_jReceiptPosition_hDishId">
-          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
+          <End Role="hDish" Type="Self.hDish" Multiplicity="1" />
           <End Role="jReceiptPosition" Type="Self.jReceiptPosition" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="hDishId">
+            <Principal Role="hDish">
               <PropertyRef Name="DishId" />
             </Principal>
             <Dependent Role="jReceiptPosition">
@@ -361,26 +373,26 @@
           <EntitySet Name="hCashBox" EntityType="Self.hCashBox" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="hDish" EntityType="Self.hDish" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="hDishComposition" EntityType="Self.hDishComposition" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="hDishId" EntityType="Self.hDishId" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="hIngridient" EntityType="Self.hIngridient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="hMenuId" EntityType="Self.hMenuId" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="hPersonal" EntityType="Self.hPersonal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="jDish" EntityType="Self.jDish" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="jDishWarehouse" EntityType="Self.jDishWarehouse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="jEntrancePosition" EntityType="Self.jEntrancePosition" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="jMenu" EntityType="Self.jMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="jMenuComposition" EntityType="Self.jMenuComposition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="jReceipt" EntityType="Self.jReceipt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="jReceiptPosition" EntityType="Self.jReceiptPosition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_hDish_hDishId" Association="Self.FK_hDish_hDishId">
-            <End Role="hDishId" EntitySet="hDishId" />
             <End Role="hDish" EntitySet="hDish" />
+            <End Role="jDish" EntitySet="jDish" />
           </AssociationSet>
           <AssociationSet Name="FK_hDish_hPersonal" Association="Self.FK_hDish_hPersonal">
             <End Role="hPersonal" EntitySet="hPersonal" />
-            <End Role="hDish" EntitySet="hDish" />
+            <End Role="jDish" EntitySet="jDish" />
           </AssociationSet>
           <AssociationSet Name="FK_hDishComposition_hDishId" Association="Self.FK_hDishComposition_hDishId">
-            <End Role="hDishId" EntitySet="hDishId" />
+            <End Role="hDish" EntitySet="hDish" />
             <End Role="hDishComposition" EntitySet="hDishComposition" />
           </AssociationSet>
           <AssociationSet Name="FK_hDishComposition_hIngridientId" Association="Self.FK_hDishComposition_hIngridientId">
@@ -392,16 +404,16 @@
             <End Role="jEntrancePosition" EntitySet="jEntrancePosition" />
           </AssociationSet>
           <AssociationSet Name="FK_jMenu_hDishId" Association="Self.FK_jMenu_hDishId">
-            <End Role="hDishId" EntitySet="hDishId" />
-            <End Role="jMenu" EntitySet="jMenu" />
+            <End Role="hDish" EntitySet="hDish" />
+            <End Role="jMenuComposition" EntitySet="jMenuComposition" />
           </AssociationSet>
           <AssociationSet Name="FK_jMenu_hMenuId" Association="Self.FK_jMenu_hMenuId">
             <End Role="hMenuId" EntitySet="hMenuId" />
-            <End Role="jMenu" EntitySet="jMenu" />
+            <End Role="jMenuComposition" EntitySet="jMenuComposition" />
           </AssociationSet>
           <AssociationSet Name="FK_jMenuComposition_hDishId" Association="Self.FK_jMenuComposition_hDishId">
-            <End Role="hDishId" EntitySet="hDishId" />
-            <End Role="jMenuComposition" EntitySet="jMenuComposition" />
+            <End Role="hDish" EntitySet="hDish" />
+            <End Role="jDishWarehouse" EntitySet="jDishWarehouse" />
           </AssociationSet>
           <AssociationSet Name="FK_jReceipt_hCashBox" Association="Self.FK_jReceipt_hCashBox">
             <End Role="hCashBox" EntitySet="hCashBox" />
@@ -412,7 +424,7 @@
             <End Role="jReceipt" EntitySet="jReceipt" />
           </AssociationSet>
           <AssociationSet Name="FK_jReceiptPosition_hDishId" Association="Self.FK_jReceiptPosition_hDishId">
-            <End Role="hDishId" EntitySet="hDishId" />
+            <End Role="hDish" EntitySet="hDish" />
             <End Role="jReceiptPosition" EntitySet="jReceiptPosition" />
           </AssociationSet>
           <AssociationSet Name="FK_jReceiptPosition_hMenuId" Association="Self.FK_jReceiptPosition_hMenuId">
@@ -424,7 +436,8 @@
             <End Role="jReceiptPosition" EntitySet="jReceiptPosition" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KOMK_v6Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -434,43 +447,33 @@
           </Key>
           <Property Name="CashBoxId" Type="Int32" Nullable="false" />
           <Property Name="CashBoxModel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Exist" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="jReceipt" Relationship="Self.FK_jReceipt_hCashBox" FromRole="hCashBox" ToRole="jReceipt" />
         </EntityType>
         <EntityType Name="hDish">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="DishId" Type="Int32" Nullable="false" />
-          <Property Name="PersonId" Type="Int32" Nullable="false" />
-          <Property Name="DishCreateDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="HumanHoursAmount" Type="Single" Nullable="false" />
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DishCost" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="hDishId" Relationship="Self.FK_hDish_hDishId" FromRole="hDish" ToRole="hDishId" />
-          <NavigationProperty Name="hPersonal" Relationship="Self.FK_hDish_hPersonal" FromRole="hDish" ToRole="hPersonal" />
-        </EntityType>
-        <EntityType Name="hDishComposition">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="DishId" Type="Int32" Nullable="false" />
-          <Property Name="IngridientId" Type="Int32" Nullable="false" />
-          <Property Name="IngridientAmount" Type="Int32" Nullable="false" />
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="hDishId" Relationship="Self.FK_hDishComposition_hDishId" FromRole="hDishComposition" ToRole="hDishId" />
-          <NavigationProperty Name="hIngridient" Relationship="Self.FK_hDishComposition_hIngridientId" FromRole="hDishComposition" ToRole="hIngridient" />
-        </EntityType>
-        <EntityType Name="hDishId">
           <Key>
             <PropertyRef Name="DishId" />
           </Key>
           <Property Name="DishId" Type="Int32" Nullable="false" />
           <Property Name="DishName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="hDish" Relationship="Self.FK_hDish_hDishId" FromRole="hDishId" ToRole="hDish" />
-          <NavigationProperty Name="hDishComposition" Relationship="Self.FK_hDishComposition_hDishId" FromRole="hDishId" ToRole="hDishComposition" />
-          <NavigationProperty Name="jMenu" Relationship="Self.FK_jMenu_hDishId" FromRole="hDishId" ToRole="jMenu" />
-          <NavigationProperty Name="jMenuComposition" Relationship="Self.FK_jMenuComposition_hDishId" FromRole="hDishId" ToRole="jMenuComposition" />
-          <NavigationProperty Name="jReceiptPosition" Relationship="Self.FK_jReceiptPosition_hDishId" FromRole="hDishId" ToRole="jReceiptPosition" />
+          <Property Name="Exist" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="jDish" Relationship="Self.FK_hDish_hDishId" FromRole="hDish" ToRole="jDish" />
+          <NavigationProperty Name="hDishComposition" Relationship="Self.FK_hDishComposition_hDishId" FromRole="hDish" ToRole="hDishComposition" />
+          <NavigationProperty Name="jMenuComposition" Relationship="Self.FK_jMenu_hDishId" FromRole="hDish" ToRole="jMenuComposition" />
+          <NavigationProperty Name="jDishWarehouse" Relationship="Self.FK_jMenuComposition_hDishId" FromRole="hDish" ToRole="jDishWarehouse" />
+          <NavigationProperty Name="jReceiptPosition" Relationship="Self.FK_jReceiptPosition_hDishId" FromRole="hDish" ToRole="jReceiptPosition" />
+        </EntityType>
+        <EntityType Name="hDishComposition">
+          <Key>
+            <PropertyRef Name="DishCompositionId" />
+          </Key>
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="IngridientId" Type="Int32" Nullable="false" />
+          <Property Name="IngridientAmount" Type="Int32" Nullable="false" />
+          <Property Name="DishCompositionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Exist" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="hDish" Relationship="Self.FK_hDishComposition_hDishId" FromRole="hDishComposition" ToRole="hDish" />
+          <NavigationProperty Name="hIngridient" Relationship="Self.FK_hDishComposition_hIngridientId" FromRole="hDishComposition" ToRole="hIngridient" />
         </EntityType>
         <EntityType Name="hIngridient">
           <Key>
@@ -478,6 +481,7 @@
           </Key>
           <Property Name="IngridientId" Type="Int32" Nullable="false" />
           <Property Name="IngridientName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Exist" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="hDishComposition" Relationship="Self.FK_hDishComposition_hIngridientId" FromRole="hIngridient" ToRole="hDishComposition" />
           <NavigationProperty Name="jEntrancePosition" Relationship="Self.FK_jEntrancePosition_hIngridientId" FromRole="hIngridient" ToRole="jEntrancePosition" />
         </EntityType>
@@ -487,7 +491,8 @@
           </Key>
           <Property Name="MenuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MenuDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="jMenu" Relationship="Self.FK_jMenu_hMenuId" FromRole="hMenuId" ToRole="jMenu" />
+          <Property Name="Exist" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="jMenuComposition" Relationship="Self.FK_jMenu_hMenuId" FromRole="hMenuId" ToRole="jMenuComposition" />
           <NavigationProperty Name="jReceiptPosition" Relationship="Self.FK_jReceiptPosition_hMenuId" FromRole="hMenuId" ToRole="jReceiptPosition" />
         </EntityType>
         <EntityType Name="hPersonal">
@@ -498,39 +503,57 @@
           <Property Name="PersonFlN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PersonCost1H" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="PersonDate" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="hDish" Relationship="Self.FK_hDish_hPersonal" FromRole="hPersonal" ToRole="hDish" />
+          <Property Name="Exist" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="jDish" Relationship="Self.FK_hDish_hPersonal" FromRole="hPersonal" ToRole="jDish" />
           <NavigationProperty Name="jReceipt" Relationship="Self.FK_jReceipt_hPersonal" FromRole="hPersonal" ToRole="jReceipt" />
+        </EntityType>
+        <EntityType Name="jDish">
+          <Key>
+            <PropertyRef Name="jDishId" />
+          </Key>
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="DishCreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="HumanHoursAmount" Type="Single" Nullable="false" />
+          <Property Name="jDishId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DishCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Exist" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="hDish" Relationship="Self.FK_hDish_hDishId" FromRole="jDish" ToRole="hDish" />
+          <NavigationProperty Name="hPersonal" Relationship="Self.FK_hDish_hPersonal" FromRole="jDish" ToRole="hPersonal" />
+        </EntityType>
+        <EntityType Name="jDishWarehouse">
+          <Key>
+            <PropertyRef Name="DishWarehouseId" />
+          </Key>
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="DishAmount" Type="Int32" Nullable="false" />
+          <Property Name="DishWarehouseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DishDate" Type="DateTime" Precision="3" />
+          <Property Name="Exist" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="hDish" Relationship="Self.FK_jMenuComposition_hDishId" FromRole="jDishWarehouse" ToRole="hDish" />
         </EntityType>
         <EntityType Name="jEntrancePosition">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="EntrancePositionId" />
           </Key>
           <Property Name="EntranceId" Type="Int32" Nullable="false" />
           <Property Name="IngridientId" Type="Int32" />
           <Property Name="IngridientCost" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntrancePositionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EntranceDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Exist" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="hIngridient" Relationship="Self.FK_jEntrancePosition_hIngridientId" FromRole="jEntrancePosition" ToRole="hIngridient" />
-        </EntityType>
-        <EntityType Name="jMenu">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="MenuId" Type="Int32" Nullable="false" />
-          <Property Name="DishId" Type="Int32" Nullable="false" />
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="hDishId" Relationship="Self.FK_jMenu_hDishId" FromRole="jMenu" ToRole="hDishId" />
-          <NavigationProperty Name="hMenuId" Relationship="Self.FK_jMenu_hMenuId" FromRole="jMenu" ToRole="hMenuId" />
         </EntityType>
         <EntityType Name="jMenuComposition">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="MenuCompositionId" />
           </Key>
+          <Property Name="MenuId" Type="Int32" Nullable="false" />
           <Property Name="DishId" Type="Int32" Nullable="false" />
-          <Property Name="DishAmount" Type="Int32" Nullable="false" />
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DishDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="hDishId" Relationship="Self.FK_jMenuComposition_hDishId" FromRole="jMenuComposition" ToRole="hDishId" />
+          <Property Name="MenuCompositionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Exist" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="hDish" Relationship="Self.FK_jMenu_hDishId" FromRole="jMenuComposition" ToRole="hDish" />
+          <NavigationProperty Name="hMenuId" Relationship="Self.FK_jMenu_hMenuId" FromRole="jMenuComposition" ToRole="hMenuId" />
         </EntityType>
         <EntityType Name="jReceipt">
           <Key>
@@ -541,21 +564,23 @@
           <Property Name="ReceiptCashBoxId" Type="Int32" Nullable="false" />
           <Property Name="PersonId" Type="Int32" Nullable="false" />
           <Property Name="ReceiptDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Exist" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="hCashBox" Relationship="Self.FK_jReceipt_hCashBox" FromRole="jReceipt" ToRole="hCashBox" />
           <NavigationProperty Name="hPersonal" Relationship="Self.FK_jReceipt_hPersonal" FromRole="jReceipt" ToRole="hPersonal" />
           <NavigationProperty Name="jReceiptPosition" Relationship="Self.FK_jReceiptPosition_jReceipt" FromRole="jReceipt" ToRole="jReceiptPosition" />
         </EntityType>
         <EntityType Name="jReceiptPosition">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="ReceiptPositionId" />
           </Key>
           <Property Name="ReceiptId" Type="Int32" Nullable="false" />
           <Property Name="DishId" Type="Int32" Nullable="false" />
           <Property Name="DishAmount" Type="Int32" Nullable="false" />
           <Property Name="DishCost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="MenuId" Type="Int32" Nullable="false" />
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="hDishId" Relationship="Self.FK_jReceiptPosition_hDishId" FromRole="jReceiptPosition" ToRole="hDishId" />
+          <Property Name="ReceiptPositionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Exist" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="hDish" Relationship="Self.FK_jReceiptPosition_hDishId" FromRole="jReceiptPosition" ToRole="hDish" />
           <NavigationProperty Name="hMenuId" Relationship="Self.FK_jReceiptPosition_hMenuId" FromRole="jReceiptPosition" ToRole="hMenuId" />
           <NavigationProperty Name="jReceipt" Relationship="Self.FK_jReceiptPosition_jReceipt" FromRole="jReceiptPosition" ToRole="jReceipt" />
         </EntityType>
@@ -582,37 +607,61 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_hDish_hDishId">
-          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
-          <End Role="hDish" Type="Self.hDish" Multiplicity="*" />
+          <End Role="hDish" Type="Self.hDish" Multiplicity="1" />
+          <End Role="jDish" Type="Self.jDish" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="hDishId">
+            <Principal Role="hDish">
               <PropertyRef Name="DishId" />
             </Principal>
-            <Dependent Role="hDish">
+            <Dependent Role="jDish">
               <PropertyRef Name="DishId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_hDish_hPersonal">
-          <End Role="hPersonal" Type="Self.hPersonal" Multiplicity="1" />
-          <End Role="hDish" Type="Self.hDish" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="hPersonal">
-              <PropertyRef Name="PersonId" />
-            </Principal>
-            <Dependent Role="hDish">
-              <PropertyRef Name="PersonId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_hDishComposition_hDishId">
-          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
+          <End Role="hDish" Type="Self.hDish" Multiplicity="1" />
           <End Role="hDishComposition" Type="Self.hDishComposition" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="hDishId">
+            <Principal Role="hDish">
               <PropertyRef Name="DishId" />
             </Principal>
             <Dependent Role="hDishComposition">
+              <PropertyRef Name="DishId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jMenu_hDishId">
+          <End Role="hDish" Type="Self.hDish" Multiplicity="1" />
+          <End Role="jMenuComposition" Type="Self.jMenuComposition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hDish">
+              <PropertyRef Name="DishId" />
+            </Principal>
+            <Dependent Role="jMenuComposition">
+              <PropertyRef Name="DishId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jMenuComposition_hDishId">
+          <End Role="hDish" Type="Self.hDish" Multiplicity="1" />
+          <End Role="jDishWarehouse" Type="Self.jDishWarehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hDish">
+              <PropertyRef Name="DishId" />
+            </Principal>
+            <Dependent Role="jDishWarehouse">
+              <PropertyRef Name="DishId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jReceiptPosition_hDishId">
+          <End Role="hDish" Type="Self.hDish" Multiplicity="1" />
+          <End Role="jReceiptPosition" Type="Self.jReceiptPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hDish">
+              <PropertyRef Name="DishId" />
+            </Principal>
+            <Dependent Role="jReceiptPosition">
               <PropertyRef Name="DishId" />
             </Dependent>
           </ReferentialConstraint>
@@ -626,42 +675,6 @@
             </Principal>
             <Dependent Role="hDishComposition">
               <PropertyRef Name="IngridientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_jMenu_hDishId">
-          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
-          <End Role="jMenu" Type="Self.jMenu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="hDishId">
-              <PropertyRef Name="DishId" />
-            </Principal>
-            <Dependent Role="jMenu">
-              <PropertyRef Name="DishId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_jMenuComposition_hDishId">
-          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
-          <End Role="jMenuComposition" Type="Self.jMenuComposition" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="hDishId">
-              <PropertyRef Name="DishId" />
-            </Principal>
-            <Dependent Role="jMenuComposition">
-              <PropertyRef Name="DishId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_jReceiptPosition_hDishId">
-          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
-          <End Role="jReceiptPosition" Type="Self.jReceiptPosition" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="hDishId">
-              <PropertyRef Name="DishId" />
-            </Principal>
-            <Dependent Role="jReceiptPosition">
-              <PropertyRef Name="DishId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -679,12 +692,12 @@
         </Association>
         <Association Name="FK_jMenu_hMenuId">
           <End Role="hMenuId" Type="Self.hMenuId" Multiplicity="1" />
-          <End Role="jMenu" Type="Self.jMenu" Multiplicity="*" />
+          <End Role="jMenuComposition" Type="Self.jMenuComposition" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="hMenuId">
               <PropertyRef Name="MenuId" />
             </Principal>
-            <Dependent Role="jMenu">
+            <Dependent Role="jMenuComposition">
               <PropertyRef Name="MenuId" />
             </Dependent>
           </ReferentialConstraint>
@@ -698,6 +711,18 @@
             </Principal>
             <Dependent Role="jReceiptPosition">
               <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_hDish_hPersonal">
+          <End Role="hPersonal" Type="Self.hPersonal" Multiplicity="1" />
+          <End Role="jDish" Type="Self.jDish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hPersonal">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="jDish">
+              <PropertyRef Name="PersonId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -725,16 +750,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="KOMK_v6Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="KOMK_v6Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="hCashBox" EntityType="Self.hCashBox" />
           <EntitySet Name="hDish" EntityType="Self.hDish" />
           <EntitySet Name="hDishComposition" EntityType="Self.hDishComposition" />
-          <EntitySet Name="hDishId" EntityType="Self.hDishId" />
           <EntitySet Name="hIngridient" EntityType="Self.hIngridient" />
           <EntitySet Name="hMenuId" EntityType="Self.hMenuId" />
           <EntitySet Name="hPersonal" EntityType="Self.hPersonal" />
+          <EntitySet Name="jDish" EntityType="Self.jDish" />
+          <EntitySet Name="jDishWarehouse" EntityType="Self.jDishWarehouse" />
           <EntitySet Name="jEntrancePosition" EntityType="Self.jEntrancePosition" />
-          <EntitySet Name="jMenu" EntityType="Self.jMenu" />
           <EntitySet Name="jMenuComposition" EntityType="Self.jMenuComposition" />
           <EntitySet Name="jReceipt" EntityType="Self.jReceipt" />
           <EntitySet Name="jReceiptPosition" EntityType="Self.jReceiptPosition" />
@@ -744,32 +769,28 @@
             <End Role="jReceipt" EntitySet="jReceipt" />
           </AssociationSet>
           <AssociationSet Name="FK_hDish_hDishId" Association="Self.FK_hDish_hDishId">
-            <End Role="hDishId" EntitySet="hDishId" />
             <End Role="hDish" EntitySet="hDish" />
-          </AssociationSet>
-          <AssociationSet Name="FK_hDish_hPersonal" Association="Self.FK_hDish_hPersonal">
-            <End Role="hPersonal" EntitySet="hPersonal" />
-            <End Role="hDish" EntitySet="hDish" />
+            <End Role="jDish" EntitySet="jDish" />
           </AssociationSet>
           <AssociationSet Name="FK_hDishComposition_hDishId" Association="Self.FK_hDishComposition_hDishId">
-            <End Role="hDishId" EntitySet="hDishId" />
+            <End Role="hDish" EntitySet="hDish" />
             <End Role="hDishComposition" EntitySet="hDishComposition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jMenu_hDishId" Association="Self.FK_jMenu_hDishId">
+            <End Role="hDish" EntitySet="hDish" />
+            <End Role="jMenuComposition" EntitySet="jMenuComposition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jMenuComposition_hDishId" Association="Self.FK_jMenuComposition_hDishId">
+            <End Role="hDish" EntitySet="hDish" />
+            <End Role="jDishWarehouse" EntitySet="jDishWarehouse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jReceiptPosition_hDishId" Association="Self.FK_jReceiptPosition_hDishId">
+            <End Role="hDish" EntitySet="hDish" />
+            <End Role="jReceiptPosition" EntitySet="jReceiptPosition" />
           </AssociationSet>
           <AssociationSet Name="FK_hDishComposition_hIngridientId" Association="Self.FK_hDishComposition_hIngridientId">
             <End Role="hIngridient" EntitySet="hIngridient" />
             <End Role="hDishComposition" EntitySet="hDishComposition" />
-          </AssociationSet>
-          <AssociationSet Name="FK_jMenu_hDishId" Association="Self.FK_jMenu_hDishId">
-            <End Role="hDishId" EntitySet="hDishId" />
-            <End Role="jMenu" EntitySet="jMenu" />
-          </AssociationSet>
-          <AssociationSet Name="FK_jMenuComposition_hDishId" Association="Self.FK_jMenuComposition_hDishId">
-            <End Role="hDishId" EntitySet="hDishId" />
-            <End Role="jMenuComposition" EntitySet="jMenuComposition" />
-          </AssociationSet>
-          <AssociationSet Name="FK_jReceiptPosition_hDishId" Association="Self.FK_jReceiptPosition_hDishId">
-            <End Role="hDishId" EntitySet="hDishId" />
-            <End Role="jReceiptPosition" EntitySet="jReceiptPosition" />
           </AssociationSet>
           <AssociationSet Name="FK_jEntrancePosition_hIngridientId" Association="Self.FK_jEntrancePosition_hIngridientId">
             <End Role="hIngridient" EntitySet="hIngridient" />
@@ -777,11 +798,15 @@
           </AssociationSet>
           <AssociationSet Name="FK_jMenu_hMenuId" Association="Self.FK_jMenu_hMenuId">
             <End Role="hMenuId" EntitySet="hMenuId" />
-            <End Role="jMenu" EntitySet="jMenu" />
+            <End Role="jMenuComposition" EntitySet="jMenuComposition" />
           </AssociationSet>
           <AssociationSet Name="FK_jReceiptPosition_hMenuId" Association="Self.FK_jReceiptPosition_hMenuId">
             <End Role="hMenuId" EntitySet="hMenuId" />
             <End Role="jReceiptPosition" EntitySet="jReceiptPosition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_hDish_hPersonal" Association="Self.FK_hDish_hPersonal">
+            <End Role="hPersonal" EntitySet="hPersonal" />
+            <End Role="jDish" EntitySet="jDish" />
           </AssociationSet>
           <AssociationSet Name="FK_jReceipt_hPersonal" Association="Self.FK_jReceipt_hPersonal">
             <End Role="hPersonal" EntitySet="hPersonal" />
@@ -808,7 +833,7 @@
             <Parameter Name="IngName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="InshMenuId">
-          <Parameter Name="MenuDate" Mode="In" Type="DateTime" />
+            <Parameter Name="MenuDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="InshPersonal">
             <Parameter Name="PersFIN" Mode="In" Type="String" />
@@ -888,12 +913,13 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище KOMK_v6ModelContainer" CdmEntityContainer="KOMK_v6Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище KOMK_v6ModelContainer" CdmEntityContainer="KOMK_v6Entities1">
           <EntitySetMapping Name="hCashBox">
             <EntityTypeMapping TypeName="KOMK_v6Model.hCashBox">
               <MappingFragment StoreEntitySet="hCashBox">
                 <ScalarProperty Name="CashBoxId" ColumnName="CashBoxId" />
                 <ScalarProperty Name="CashBoxModel" ColumnName="CashBoxModel" />
+                <ScalarProperty Name="Exist" ColumnName="Exist" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -901,11 +927,8 @@
             <EntityTypeMapping TypeName="KOMK_v6Model.hDish">
               <MappingFragment StoreEntitySet="hDish">
                 <ScalarProperty Name="DishId" ColumnName="DishId" />
-                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
-                <ScalarProperty Name="DishCreateDate" ColumnName="DishCreateDate" />
-                <ScalarProperty Name="HumanHoursAmount" ColumnName="HumanHoursAmount" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="DishCost" ColumnName="DishCost" />
+                <ScalarProperty Name="DishName" ColumnName="DishName" />
+                <ScalarProperty Name="Exist" ColumnName="Exist" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -915,15 +938,8 @@
                 <ScalarProperty Name="DishId" ColumnName="DishId" />
                 <ScalarProperty Name="IngridientId" ColumnName="IngridientId" />
                 <ScalarProperty Name="IngridientAmount" ColumnName="IngridientAmount" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="hDishId">
-            <EntityTypeMapping TypeName="KOMK_v6Model.hDishId">
-              <MappingFragment StoreEntitySet="hDishId">
-                <ScalarProperty Name="DishId" ColumnName="DishId" />
-                <ScalarProperty Name="DishName" ColumnName="DishName" />
+                <ScalarProperty Name="DishCompositionId" ColumnName="DishCompositionId" />
+                <ScalarProperty Name="Exist" ColumnName="Exist" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -932,6 +948,7 @@
               <MappingFragment StoreEntitySet="hIngridient">
                 <ScalarProperty Name="IngridientId" ColumnName="IngridientId" />
                 <ScalarProperty Name="IngridientName" ColumnName="IngridientName" />
+                <ScalarProperty Name="Exist" ColumnName="Exist" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -940,6 +957,7 @@
               <MappingFragment StoreEntitySet="hMenuId">
                 <ScalarProperty Name="MenuId" ColumnName="MenuId" />
                 <ScalarProperty Name="MenuDate" ColumnName="MenuDate" />
+                <ScalarProperty Name="Exist" ColumnName="Exist" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -950,6 +968,31 @@
                 <ScalarProperty Name="PersonFlN" ColumnName="PersonFlN" />
                 <ScalarProperty Name="PersonCost1H" ColumnName="PersonCost1H" />
                 <ScalarProperty Name="PersonDate" ColumnName="PersonDate" />
+                <ScalarProperty Name="Exist" ColumnName="Exist" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="jDish">
+            <EntityTypeMapping TypeName="KOMK_v6Model.jDish">
+              <MappingFragment StoreEntitySet="jDish">
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="DishCreateDate" ColumnName="DishCreateDate" />
+                <ScalarProperty Name="HumanHoursAmount" ColumnName="HumanHoursAmount" />
+                <ScalarProperty Name="jDishId" ColumnName="jDishId" />
+                <ScalarProperty Name="DishCost" ColumnName="DishCost" />
+                <ScalarProperty Name="Exist" ColumnName="Exist" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="jDishWarehouse">
+            <EntityTypeMapping TypeName="KOMK_v6Model.jDishWarehouse">
+              <MappingFragment StoreEntitySet="jDishWarehouse">
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="DishAmount" ColumnName="DishAmount" />
+                <ScalarProperty Name="DishWarehouseId" ColumnName="DishWarehouseId" />
+                <ScalarProperty Name="DishDate" ColumnName="DishDate" />
+                <ScalarProperty Name="Exist" ColumnName="Exist" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -959,27 +1002,19 @@
                 <ScalarProperty Name="EntranceId" ColumnName="EntranceId" />
                 <ScalarProperty Name="IngridientId" ColumnName="IngridientId" />
                 <ScalarProperty Name="IngridientCost" ColumnName="IngridientCost" />
-                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="EntrancePositionId" ColumnName="EntrancePositionId" />
                 <ScalarProperty Name="EntranceDateTime" ColumnName="EntranceDateTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="jMenu">
-            <EntityTypeMapping TypeName="KOMK_v6Model.jMenu">
-              <MappingFragment StoreEntitySet="jMenu">
-                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
-                <ScalarProperty Name="DishId" ColumnName="DishId" />
-                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Exist" ColumnName="Exist" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="jMenuComposition">
             <EntityTypeMapping TypeName="KOMK_v6Model.jMenuComposition">
               <MappingFragment StoreEntitySet="jMenuComposition">
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
                 <ScalarProperty Name="DishId" ColumnName="DishId" />
-                <ScalarProperty Name="DishAmount" ColumnName="DishAmount" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="DishDate" ColumnName="DishDate" />
+                <ScalarProperty Name="MenuCompositionId" ColumnName="MenuCompositionId" />
+                <ScalarProperty Name="Exist" ColumnName="Exist" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -991,6 +1026,7 @@
                 <ScalarProperty Name="ReceiptCashBoxId" ColumnName="ReceiptCashBoxId" />
                 <ScalarProperty Name="PersonId" ColumnName="PersonId" />
                 <ScalarProperty Name="ReceiptDateTime" ColumnName="ReceiptDateTime" />
+                <ScalarProperty Name="Exist" ColumnName="Exist" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1002,7 +1038,8 @@
                 <ScalarProperty Name="DishAmount" ColumnName="DishAmount" />
                 <ScalarProperty Name="DishCost" ColumnName="DishCost" />
                 <ScalarProperty Name="MenuId" ColumnName="MenuId" />
-                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ReceiptPositionId" ColumnName="ReceiptPositionId" />
+                <ScalarProperty Name="Exist" ColumnName="Exist" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

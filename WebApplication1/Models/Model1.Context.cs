@@ -6,7 +6,7 @@
 //     Изменения, вносимые в этот файл вручную, будут перезаписаны при повторном создании кода.
 // </auto-generated>
 //------------------------------------------------------------------------------
-//изменения тест
+
 namespace WebApplication1.Models
 {
     using System;
@@ -15,10 +15,10 @@ namespace WebApplication1.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class KOMK_v6Entities : DbContext
+    public partial class KOMK_v6Entities1 : DbContext
     {
-        public KOMK_v6Entities()
-            : base("name=KOMK_v6Entities")
+        public KOMK_v6Entities1()
+            : base("name=KOMK_v6Entities1")
         {
         }
     
@@ -30,12 +30,12 @@ namespace WebApplication1.Models
         public virtual DbSet<hCashBox> hCashBox { get; set; }
         public virtual DbSet<hDish> hDish { get; set; }
         public virtual DbSet<hDishComposition> hDishComposition { get; set; }
-        public virtual DbSet<hDishId> hDishId { get; set; }
         public virtual DbSet<hIngridient> hIngridient { get; set; }
         public virtual DbSet<hMenuId> hMenuId { get; set; }
         public virtual DbSet<hPersonal> hPersonal { get; set; }
+        public virtual DbSet<jDish> jDish { get; set; }
+        public virtual DbSet<jDishWarehouse> jDishWarehouse { get; set; }
         public virtual DbSet<jEntrancePosition> jEntrancePosition { get; set; }
-        public virtual DbSet<jMenu> jMenu { get; set; }
         public virtual DbSet<jMenuComposition> jMenuComposition { get; set; }
         public virtual DbSet<jReceipt> jReceipt { get; set; }
         public virtual DbSet<jReceiptPosition> jReceiptPosition { get; set; }

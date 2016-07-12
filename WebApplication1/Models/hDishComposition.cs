@@ -17,9 +17,10 @@ namespace WebApplication1.Models
         public int DishId { get; set; }
         public int IngridientId { get; set; }
         public int IngridientAmount { get; set; }
-        public int id { get; set; }
+        public int DishCompositionId { get; set; }
+        public bool Exist { get; set; }
     
-        public virtual hDishId hDishId { get; set; }
+        public virtual hDish hDish { get; set; }
         public virtual hIngridient hIngridient { get; set; }
     }
 }

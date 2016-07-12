@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Delete";
+    Layout = "~/Views/hIngridients/Create.cshtml";
 }
 
 <h2>Delete</h2>
@@ -17,6 +18,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.IngridientName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Exist)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Exist)
         </dd>
 
     </dl>

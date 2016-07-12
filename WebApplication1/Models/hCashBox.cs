@@ -22,6 +22,7 @@ namespace WebApplication1.Models
     
         public int CashBoxId { get; set; }
         public string CashBoxModel { get; set; }
+        public bool Exist { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<jReceipt> jReceipt { get; set; }

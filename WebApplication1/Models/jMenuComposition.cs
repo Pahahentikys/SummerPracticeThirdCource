@@ -14,11 +14,12 @@ namespace WebApplication1.Models
     
     public partial class jMenuComposition
     {
+        public int MenuId { get; set; }
         public int DishId { get; set; }
-        public int DishAmount { get; set; }
-        public int id { get; set; }
-        public Nullable<System.DateTime> DishDate { get; set; }
+        public int MenuCompositionId { get; set; }
+        public bool Exist { get; set; }
     
-        public virtual hDishId hDishId { get; set; }
+        public virtual hDish hDish { get; set; }
+        public virtual hMenuId hMenuId { get; set; }
     }
 }

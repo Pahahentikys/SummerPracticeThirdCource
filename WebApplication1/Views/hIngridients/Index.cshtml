@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/hIngridients/Create.cshtml";
 }
 
 <h2>Index</h2>
@@ -14,6 +15,9 @@
         <th>
             @Html.DisplayNameFor(model => model.IngridientName)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Exist)
+        </th>
         <th></th>
     </tr>
 
@@ -21,6 +25,9 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.IngridientName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Exist)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.IngridientId }) |

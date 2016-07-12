@@ -12,7 +12,7 @@ namespace WebApplication1.Controllers
 {
     public class hIngridientsController : Controller
     {
-        private KOMK_v6Entities db = new KOMK_v6Entities();
+        private KOMK_v6Entities1 db = new KOMK_v6Entities1();
 
         // GET: hIngridients
         public ActionResult Index()
@@ -46,7 +46,7 @@ namespace WebApplication1.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IngridientId,IngridientName")] hIngridient hIngridient)
+        public ActionResult Create([Bind(Include = "IngridientId,IngridientName,Exist")] hIngridient hIngridient)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace WebApplication1.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IngridientId,IngridientName")] hIngridient hIngridient)
+        public ActionResult Edit([Bind(Include = "IngridientId,IngridientName,Exist")] hIngridient hIngridient)
         {
             if (ModelState.IsValid)
             {

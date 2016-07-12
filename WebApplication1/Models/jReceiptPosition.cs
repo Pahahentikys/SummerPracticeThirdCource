@@ -19,9 +19,10 @@ namespace WebApplication1.Models
         public int DishAmount { get; set; }
         public decimal DishCost { get; set; }
         public int MenuId { get; set; }
-        public int id { get; set; }
+        public int ReceiptPositionId { get; set; }
+        public bool Exist { get; set; }
     
-        public virtual hDishId hDishId { get; set; }
+        public virtual hDish hDish { get; set; }
         public virtual hMenuId hMenuId { get; set; }
         public virtual jReceipt jReceipt { get; set; }
     }

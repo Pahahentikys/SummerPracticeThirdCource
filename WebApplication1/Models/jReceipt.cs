@@ -25,6 +25,7 @@ namespace WebApplication1.Models
         public int ReceiptCashBoxId { get; set; }
         public int PersonId { get; set; }
         public System.DateTime ReceiptDateTime { get; set; }
+        public bool Exist { get; set; }
     
         public virtual hCashBox hCashBox { get; set; }
         public virtual hPersonal hPersonal { get; set; }

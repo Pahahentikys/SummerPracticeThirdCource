@@ -4,31 +4,31 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3e45a5efc80e45339e4db2121f4645ee" Name="Diagram1" ZoomLevel="109">
-        <EntityTypeShape EntityType="KOMK_v6Model.hCashBox" Width="1.5" PointX="1.5" PointY="16.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="KOMK_v6Model.hDish" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KOMK_v6Model.hDishComposition" Width="2.125" PointX="3" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="KOMK_v6Model.hDishId" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="KOMK_v6Model.hIngridient" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="KOMK_v6Model.hMenuId" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="KOMK_v6Model.hPersonal" Width="1.5" PointX="1.5" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="KOMK_v6Model.jEntrancePosition" Width="1.5" PointX="3" PointY="25" IsExpanded="true" />
-        <EntityTypeShape EntityType="KOMK_v6Model.jMenu" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="KOMK_v6Model.jMenuComposition" Width="1.5" PointX="3" PointY="21.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="KOMK_v6Model.jReceipt" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KOMK_v6Model.jReceiptPosition" Width="1.5" PointX="6" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="KOMK_v6Model.sysdiagrams" Width="1.5" PointX="5.75" PointY="2" IsExpanded="true" />
+      <Diagram DiagramId="f18c51d9c95e484e9f6a0741d5a2581a" Name="Diagram1">
+        <EntityTypeShape EntityType="KOMK_v6Model.hCashBox" Width="1.5" PointX="1.5" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOMK_v6Model.hDish" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOMK_v6Model.hDishComposition" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOMK_v6Model.hIngridient" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOMK_v6Model.hMenuId" Width="1.5" PointX="3.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOMK_v6Model.hPersonal" Width="1.5" PointX="1.5" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOMK_v6Model.jDish" Width="1.5" PointX="6" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOMK_v6Model.jDishWarehouse" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOMK_v6Model.jEntrancePosition" Width="1.5" PointX="3" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOMK_v6Model.jMenuComposition" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOMK_v6Model.jReceipt" Width="1.5" PointX="3.75" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOMK_v6Model.jReceiptPosition" Width="1.5" PointX="6" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOMK_v6Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="KOMK_v6Model.FK_jReceipt_hCashBox" ManuallyRouted="false" />
         <AssociationConnector Association="KOMK_v6Model.FK_hDish_hDishId" ManuallyRouted="false" />
-        <AssociationConnector Association="KOMK_v6Model.FK_hDish_hPersonal" ManuallyRouted="false" />
         <AssociationConnector Association="KOMK_v6Model.FK_hDishComposition_hDishId" ManuallyRouted="false" />
-        <AssociationConnector Association="KOMK_v6Model.FK_hDishComposition_hIngridientId" ManuallyRouted="false" />
         <AssociationConnector Association="KOMK_v6Model.FK_jMenu_hDishId" ManuallyRouted="false" />
         <AssociationConnector Association="KOMK_v6Model.FK_jMenuComposition_hDishId" ManuallyRouted="false" />
         <AssociationConnector Association="KOMK_v6Model.FK_jReceiptPosition_hDishId" ManuallyRouted="false" />
+        <AssociationConnector Association="KOMK_v6Model.FK_hDishComposition_hIngridientId" ManuallyRouted="false" />
         <AssociationConnector Association="KOMK_v6Model.FK_jEntrancePosition_hIngridientId" ManuallyRouted="false" />
         <AssociationConnector Association="KOMK_v6Model.FK_jMenu_hMenuId" ManuallyRouted="false" />
         <AssociationConnector Association="KOMK_v6Model.FK_jReceiptPosition_hMenuId" ManuallyRouted="false" />
+        <AssociationConnector Association="KOMK_v6Model.FK_hDish_hPersonal" ManuallyRouted="false" />
         <AssociationConnector Association="KOMK_v6Model.FK_jReceipt_hPersonal" ManuallyRouted="false" />
         <AssociationConnector Association="KOMK_v6Model.FK_jReceiptPosition_jReceipt" ManuallyRouted="false" />
       </Diagram>

@@ -172,9 +172,6 @@
     <Compile Include="Models\hDishComposition.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\hDishId.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\hIngridient.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -184,10 +181,13 @@
     <Compile Include="Models\hPersonal.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\jEntrancePosition.cs">
+    <Compile Include="Models\jDish.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\jMenu.cs">
+    <Compile Include="Models\jDishWarehouse.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\jEntrancePosition.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\jMenuComposition.cs">

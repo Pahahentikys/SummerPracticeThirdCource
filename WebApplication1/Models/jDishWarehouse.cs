@@ -12,15 +12,14 @@ namespace WebApplication1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class jEntrancePosition
+    public partial class jDishWarehouse
     {
-        public int EntranceId { get; set; }
-        public Nullable<int> IngridientId { get; set; }
-        public Nullable<decimal> IngridientCost { get; set; }
-        public int EntrancePositionId { get; set; }
-        public Nullable<System.DateTime> EntranceDateTime { get; set; }
+        public int DishId { get; set; }
+        public int DishAmount { get; set; }
+        public int DishWarehouseId { get; set; }
+        public Nullable<System.DateTime> DishDate { get; set; }
         public bool Exist { get; set; }
     
-        public virtual hIngridient hIngridient { get; set; }
+        public virtual hDish hDish { get; set; }
     }
 }
