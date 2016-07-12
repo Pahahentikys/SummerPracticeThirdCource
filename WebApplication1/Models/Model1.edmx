@@ -1,0 +1,1077 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище KOMK_v6Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="hCashBox">
+          <Key>
+            <PropertyRef Name="CashBoxId" />
+          </Key>
+          <Property Name="CashBoxId" Type="int" Nullable="false" />
+          <Property Name="CashBoxModel" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="hDish">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="DishId" Type="int" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="DishCreateDate" Type="datetime" Nullable="false" />
+          <Property Name="HumanHoursAmount" Type="real" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DishCost" Type="money" />
+        </EntityType>
+        <EntityType Name="hDishComposition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="DishId" Type="int" Nullable="false" />
+          <Property Name="IngridientId" Type="int" Nullable="false" />
+          <Property Name="IngridientAmount" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="hDishId">
+          <Key>
+            <PropertyRef Name="DishId" />
+          </Key>
+          <Property Name="DishId" Type="int" Nullable="false" />
+          <Property Name="DishName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="hIngridient">
+          <Key>
+            <PropertyRef Name="IngridientId" />
+          </Key>
+          <Property Name="IngridientId" Type="int" Nullable="false" />
+          <Property Name="IngridientName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="hMenuId">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="MenuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuDate" Type="date" />
+        </EntityType>
+        <EntityType Name="hPersonal">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonFlN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PersonCost1H" Type="money" Nullable="false" />
+          <Property Name="PersonDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="jEntrancePosition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="EntranceId" Type="int" Nullable="false" />
+          <Property Name="IngridientId" Type="int" />
+          <Property Name="IngridientCost" Type="money" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntranceDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="jMenu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="MenuId" Type="int" Nullable="false" />
+          <Property Name="DishId" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="jMenuComposition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="DishId" Type="int" Nullable="false" />
+          <Property Name="DishAmount" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DishDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="jReceipt">
+          <Key>
+            <PropertyRef Name="ReceiptId" />
+          </Key>
+          <Property Name="ReceiptId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReceiptSumAmount" Type="money" Nullable="false" />
+          <Property Name="ReceiptCashBoxId" Type="int" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="ReceiptDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="jReceiptPosition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="ReceiptId" Type="int" Nullable="false" />
+          <Property Name="DishId" Type="int" Nullable="false" />
+          <Property Name="DishAmount" Type="int" Nullable="false" />
+          <Property Name="DishCost" Type="money" Nullable="false" />
+          <Property Name="MenuId" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_hDish_hDishId">
+          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
+          <End Role="hDish" Type="Self.hDish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hDishId">
+              <PropertyRef Name="DishId" />
+            </Principal>
+            <Dependent Role="hDish">
+              <PropertyRef Name="DishId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_hDish_hPersonal">
+          <End Role="hPersonal" Type="Self.hPersonal" Multiplicity="1" />
+          <End Role="hDish" Type="Self.hDish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hPersonal">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="hDish">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_hDishComposition_hDishId">
+          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
+          <End Role="hDishComposition" Type="Self.hDishComposition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hDishId">
+              <PropertyRef Name="DishId" />
+            </Principal>
+            <Dependent Role="hDishComposition">
+              <PropertyRef Name="DishId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_hDishComposition_hIngridientId">
+          <End Role="hIngridient" Type="Self.hIngridient" Multiplicity="1" />
+          <End Role="hDishComposition" Type="Self.hDishComposition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hIngridient">
+              <PropertyRef Name="IngridientId" />
+            </Principal>
+            <Dependent Role="hDishComposition">
+              <PropertyRef Name="IngridientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jEntrancePosition_hIngridientId">
+          <End Role="hIngridient" Type="Self.hIngridient" Multiplicity="0..1" />
+          <End Role="jEntrancePosition" Type="Self.jEntrancePosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hIngridient">
+              <PropertyRef Name="IngridientId" />
+            </Principal>
+            <Dependent Role="jEntrancePosition">
+              <PropertyRef Name="IngridientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jMenu_hDishId">
+          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
+          <End Role="jMenu" Type="Self.jMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hDishId">
+              <PropertyRef Name="DishId" />
+            </Principal>
+            <Dependent Role="jMenu">
+              <PropertyRef Name="DishId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jMenu_hMenuId">
+          <End Role="hMenuId" Type="Self.hMenuId" Multiplicity="1" />
+          <End Role="jMenu" Type="Self.jMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hMenuId">
+              <PropertyRef Name="MenuId" />
+            </Principal>
+            <Dependent Role="jMenu">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jMenuComposition_hDishId">
+          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
+          <End Role="jMenuComposition" Type="Self.jMenuComposition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hDishId">
+              <PropertyRef Name="DishId" />
+            </Principal>
+            <Dependent Role="jMenuComposition">
+              <PropertyRef Name="DishId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jReceipt_hCashBox">
+          <End Role="hCashBox" Type="Self.hCashBox" Multiplicity="1" />
+          <End Role="jReceipt" Type="Self.jReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hCashBox">
+              <PropertyRef Name="CashBoxId" />
+            </Principal>
+            <Dependent Role="jReceipt">
+              <PropertyRef Name="ReceiptCashBoxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jReceipt_hPersonal">
+          <End Role="hPersonal" Type="Self.hPersonal" Multiplicity="1" />
+          <End Role="jReceipt" Type="Self.jReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hPersonal">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="jReceipt">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jReceiptPosition_hDishId">
+          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
+          <End Role="jReceiptPosition" Type="Self.jReceiptPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hDishId">
+              <PropertyRef Name="DishId" />
+            </Principal>
+            <Dependent Role="jReceiptPosition">
+              <PropertyRef Name="DishId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jReceiptPosition_hMenuId">
+          <End Role="hMenuId" Type="Self.hMenuId" Multiplicity="1" />
+          <End Role="jReceiptPosition" Type="Self.jReceiptPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hMenuId">
+              <PropertyRef Name="MenuId" />
+            </Principal>
+            <Dependent Role="jReceiptPosition">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jReceiptPosition_jReceipt">
+          <End Role="jReceipt" Type="Self.jReceipt" Multiplicity="1" />
+          <End Role="jReceiptPosition" Type="Self.jReceiptPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="jReceipt">
+              <PropertyRef Name="ReceiptId" />
+            </Principal>
+            <Dependent Role="jReceiptPosition">
+              <PropertyRef Name="ReceiptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="InshDish" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DishId" Type="int" Mode="In" />
+          <Parameter Name="DishName" Type="nvarchar" Mode="In" />
+          <Parameter Name="PersId" Type="int" Mode="In" />
+          <Parameter Name="DishDate" Type="datetime" Mode="In" />
+          <Parameter Name="HrsAm" Type="real" Mode="In" />
+        </Function>
+        <Function Name="InshDishComposition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DishId" Type="int" Mode="In" />
+          <Parameter Name="IngId" Type="int" Mode="In" />
+          <Parameter Name="IngAm" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InshIngridient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IngId" Type="int" Mode="In" />
+          <Parameter Name="IngName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="InshMenuId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MenuDate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="InshPersonal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PersFIN" Type="nvarchar" Mode="In" />
+          <Parameter Name="PersCost" Type="money" Mode="In" />
+          <Parameter Name="PersDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="InsjEntrance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntCost" Type="money" Mode="In" />
+          <Parameter Name="EntDT" Type="datetime" Mode="In" />
+          <Parameter Name="IngId" Type="int" Mode="In" />
+          <Parameter Name="IngAm" Type="int" Mode="In" />
+          <Parameter Name="IngCost" Type="money" Mode="In" />
+        </Function>
+        <Function Name="InsjMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MenuId" Type="int" Mode="In" />
+          <Parameter Name="DishId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsjMenuComposition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DishId" Type="int" Mode="In" />
+          <Parameter Name="DishAm" Type="int" Mode="In" />
+          <Parameter Name="DishDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="InsjReceiptCashBox" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PersId" Type="int" Mode="In" />
+          <Parameter Name="CashBoxId" Type="int" Mode="In" />
+          <Parameter Name="SumAmount" Type="money" Mode="In" />
+        </Function>
+        <Function Name="InsReceiptPosition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReceiptId" Type="int" Mode="In" />
+          <Parameter Name="DishId" Type="int" Mode="In" />
+          <Parameter Name="DishAm" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Хранилище KOMK_v6ModelContainer">
+          <EntitySet Name="hCashBox" EntityType="Self.hCashBox" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hDish" EntityType="Self.hDish" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hDishComposition" EntityType="Self.hDishComposition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hDishId" EntityType="Self.hDishId" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hIngridient" EntityType="Self.hIngridient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hMenuId" EntityType="Self.hMenuId" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hPersonal" EntityType="Self.hPersonal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="jEntrancePosition" EntityType="Self.jEntrancePosition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="jMenu" EntityType="Self.jMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="jMenuComposition" EntityType="Self.jMenuComposition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="jReceipt" EntityType="Self.jReceipt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="jReceiptPosition" EntityType="Self.jReceiptPosition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_hDish_hDishId" Association="Self.FK_hDish_hDishId">
+            <End Role="hDishId" EntitySet="hDishId" />
+            <End Role="hDish" EntitySet="hDish" />
+          </AssociationSet>
+          <AssociationSet Name="FK_hDish_hPersonal" Association="Self.FK_hDish_hPersonal">
+            <End Role="hPersonal" EntitySet="hPersonal" />
+            <End Role="hDish" EntitySet="hDish" />
+          </AssociationSet>
+          <AssociationSet Name="FK_hDishComposition_hDishId" Association="Self.FK_hDishComposition_hDishId">
+            <End Role="hDishId" EntitySet="hDishId" />
+            <End Role="hDishComposition" EntitySet="hDishComposition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_hDishComposition_hIngridientId" Association="Self.FK_hDishComposition_hIngridientId">
+            <End Role="hIngridient" EntitySet="hIngridient" />
+            <End Role="hDishComposition" EntitySet="hDishComposition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jEntrancePosition_hIngridientId" Association="Self.FK_jEntrancePosition_hIngridientId">
+            <End Role="hIngridient" EntitySet="hIngridient" />
+            <End Role="jEntrancePosition" EntitySet="jEntrancePosition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jMenu_hDishId" Association="Self.FK_jMenu_hDishId">
+            <End Role="hDishId" EntitySet="hDishId" />
+            <End Role="jMenu" EntitySet="jMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jMenu_hMenuId" Association="Self.FK_jMenu_hMenuId">
+            <End Role="hMenuId" EntitySet="hMenuId" />
+            <End Role="jMenu" EntitySet="jMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jMenuComposition_hDishId" Association="Self.FK_jMenuComposition_hDishId">
+            <End Role="hDishId" EntitySet="hDishId" />
+            <End Role="jMenuComposition" EntitySet="jMenuComposition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jReceipt_hCashBox" Association="Self.FK_jReceipt_hCashBox">
+            <End Role="hCashBox" EntitySet="hCashBox" />
+            <End Role="jReceipt" EntitySet="jReceipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jReceipt_hPersonal" Association="Self.FK_jReceipt_hPersonal">
+            <End Role="hPersonal" EntitySet="hPersonal" />
+            <End Role="jReceipt" EntitySet="jReceipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jReceiptPosition_hDishId" Association="Self.FK_jReceiptPosition_hDishId">
+            <End Role="hDishId" EntitySet="hDishId" />
+            <End Role="jReceiptPosition" EntitySet="jReceiptPosition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jReceiptPosition_hMenuId" Association="Self.FK_jReceiptPosition_hMenuId">
+            <End Role="hMenuId" EntitySet="hMenuId" />
+            <End Role="jReceiptPosition" EntitySet="jReceiptPosition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jReceiptPosition_jReceipt" Association="Self.FK_jReceiptPosition_jReceipt">
+            <End Role="jReceipt" EntitySet="jReceipt" />
+            <End Role="jReceiptPosition" EntitySet="jReceiptPosition" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KOMK_v6Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="hCashBox">
+          <Key>
+            <PropertyRef Name="CashBoxId" />
+          </Key>
+          <Property Name="CashBoxId" Type="Int32" Nullable="false" />
+          <Property Name="CashBoxModel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="jReceipt" Relationship="Self.FK_jReceipt_hCashBox" FromRole="hCashBox" ToRole="jReceipt" />
+        </EntityType>
+        <EntityType Name="hDish">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="DishCreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="HumanHoursAmount" Type="Single" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DishCost" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="hDishId" Relationship="Self.FK_hDish_hDishId" FromRole="hDish" ToRole="hDishId" />
+          <NavigationProperty Name="hPersonal" Relationship="Self.FK_hDish_hPersonal" FromRole="hDish" ToRole="hPersonal" />
+        </EntityType>
+        <EntityType Name="hDishComposition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="IngridientId" Type="Int32" Nullable="false" />
+          <Property Name="IngridientAmount" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="hDishId" Relationship="Self.FK_hDishComposition_hDishId" FromRole="hDishComposition" ToRole="hDishId" />
+          <NavigationProperty Name="hIngridient" Relationship="Self.FK_hDishComposition_hIngridientId" FromRole="hDishComposition" ToRole="hIngridient" />
+        </EntityType>
+        <EntityType Name="hDishId">
+          <Key>
+            <PropertyRef Name="DishId" />
+          </Key>
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="DishName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="hDish" Relationship="Self.FK_hDish_hDishId" FromRole="hDishId" ToRole="hDish" />
+          <NavigationProperty Name="hDishComposition" Relationship="Self.FK_hDishComposition_hDishId" FromRole="hDishId" ToRole="hDishComposition" />
+          <NavigationProperty Name="jMenu" Relationship="Self.FK_jMenu_hDishId" FromRole="hDishId" ToRole="jMenu" />
+          <NavigationProperty Name="jMenuComposition" Relationship="Self.FK_jMenuComposition_hDishId" FromRole="hDishId" ToRole="jMenuComposition" />
+          <NavigationProperty Name="jReceiptPosition" Relationship="Self.FK_jReceiptPosition_hDishId" FromRole="hDishId" ToRole="jReceiptPosition" />
+        </EntityType>
+        <EntityType Name="hIngridient">
+          <Key>
+            <PropertyRef Name="IngridientId" />
+          </Key>
+          <Property Name="IngridientId" Type="Int32" Nullable="false" />
+          <Property Name="IngridientName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="hDishComposition" Relationship="Self.FK_hDishComposition_hIngridientId" FromRole="hIngridient" ToRole="hDishComposition" />
+          <NavigationProperty Name="jEntrancePosition" Relationship="Self.FK_jEntrancePosition_hIngridientId" FromRole="hIngridient" ToRole="jEntrancePosition" />
+        </EntityType>
+        <EntityType Name="hMenuId">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="MenuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="jMenu" Relationship="Self.FK_jMenu_hMenuId" FromRole="hMenuId" ToRole="jMenu" />
+          <NavigationProperty Name="jReceiptPosition" Relationship="Self.FK_jReceiptPosition_hMenuId" FromRole="hMenuId" ToRole="jReceiptPosition" />
+        </EntityType>
+        <EntityType Name="hPersonal">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonFlN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PersonCost1H" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="PersonDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="hDish" Relationship="Self.FK_hDish_hPersonal" FromRole="hPersonal" ToRole="hDish" />
+          <NavigationProperty Name="jReceipt" Relationship="Self.FK_jReceipt_hPersonal" FromRole="hPersonal" ToRole="jReceipt" />
+        </EntityType>
+        <EntityType Name="jEntrancePosition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="EntranceId" Type="Int32" Nullable="false" />
+          <Property Name="IngridientId" Type="Int32" />
+          <Property Name="IngridientCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntranceDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="hIngridient" Relationship="Self.FK_jEntrancePosition_hIngridientId" FromRole="jEntrancePosition" ToRole="hIngridient" />
+        </EntityType>
+        <EntityType Name="jMenu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="MenuId" Type="Int32" Nullable="false" />
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="hDishId" Relationship="Self.FK_jMenu_hDishId" FromRole="jMenu" ToRole="hDishId" />
+          <NavigationProperty Name="hMenuId" Relationship="Self.FK_jMenu_hMenuId" FromRole="jMenu" ToRole="hMenuId" />
+        </EntityType>
+        <EntityType Name="jMenuComposition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="DishAmount" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DishDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="hDishId" Relationship="Self.FK_jMenuComposition_hDishId" FromRole="jMenuComposition" ToRole="hDishId" />
+        </EntityType>
+        <EntityType Name="jReceipt">
+          <Key>
+            <PropertyRef Name="ReceiptId" />
+          </Key>
+          <Property Name="ReceiptId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReceiptSumAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="ReceiptCashBoxId" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="ReceiptDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="hCashBox" Relationship="Self.FK_jReceipt_hCashBox" FromRole="jReceipt" ToRole="hCashBox" />
+          <NavigationProperty Name="hPersonal" Relationship="Self.FK_jReceipt_hPersonal" FromRole="jReceipt" ToRole="hPersonal" />
+          <NavigationProperty Name="jReceiptPosition" Relationship="Self.FK_jReceiptPosition_jReceipt" FromRole="jReceipt" ToRole="jReceiptPosition" />
+        </EntityType>
+        <EntityType Name="jReceiptPosition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="ReceiptId" Type="Int32" Nullable="false" />
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="DishAmount" Type="Int32" Nullable="false" />
+          <Property Name="DishCost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="MenuId" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="hDishId" Relationship="Self.FK_jReceiptPosition_hDishId" FromRole="jReceiptPosition" ToRole="hDishId" />
+          <NavigationProperty Name="hMenuId" Relationship="Self.FK_jReceiptPosition_hMenuId" FromRole="jReceiptPosition" ToRole="hMenuId" />
+          <NavigationProperty Name="jReceipt" Relationship="Self.FK_jReceiptPosition_jReceipt" FromRole="jReceiptPosition" ToRole="jReceipt" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_jReceipt_hCashBox">
+          <End Role="hCashBox" Type="Self.hCashBox" Multiplicity="1" />
+          <End Role="jReceipt" Type="Self.jReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hCashBox">
+              <PropertyRef Name="CashBoxId" />
+            </Principal>
+            <Dependent Role="jReceipt">
+              <PropertyRef Name="ReceiptCashBoxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_hDish_hDishId">
+          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
+          <End Role="hDish" Type="Self.hDish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hDishId">
+              <PropertyRef Name="DishId" />
+            </Principal>
+            <Dependent Role="hDish">
+              <PropertyRef Name="DishId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_hDish_hPersonal">
+          <End Role="hPersonal" Type="Self.hPersonal" Multiplicity="1" />
+          <End Role="hDish" Type="Self.hDish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hPersonal">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="hDish">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_hDishComposition_hDishId">
+          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
+          <End Role="hDishComposition" Type="Self.hDishComposition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hDishId">
+              <PropertyRef Name="DishId" />
+            </Principal>
+            <Dependent Role="hDishComposition">
+              <PropertyRef Name="DishId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_hDishComposition_hIngridientId">
+          <End Role="hIngridient" Type="Self.hIngridient" Multiplicity="1" />
+          <End Role="hDishComposition" Type="Self.hDishComposition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hIngridient">
+              <PropertyRef Name="IngridientId" />
+            </Principal>
+            <Dependent Role="hDishComposition">
+              <PropertyRef Name="IngridientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jMenu_hDishId">
+          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
+          <End Role="jMenu" Type="Self.jMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hDishId">
+              <PropertyRef Name="DishId" />
+            </Principal>
+            <Dependent Role="jMenu">
+              <PropertyRef Name="DishId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jMenuComposition_hDishId">
+          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
+          <End Role="jMenuComposition" Type="Self.jMenuComposition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hDishId">
+              <PropertyRef Name="DishId" />
+            </Principal>
+            <Dependent Role="jMenuComposition">
+              <PropertyRef Name="DishId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jReceiptPosition_hDishId">
+          <End Role="hDishId" Type="Self.hDishId" Multiplicity="1" />
+          <End Role="jReceiptPosition" Type="Self.jReceiptPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hDishId">
+              <PropertyRef Name="DishId" />
+            </Principal>
+            <Dependent Role="jReceiptPosition">
+              <PropertyRef Name="DishId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jEntrancePosition_hIngridientId">
+          <End Role="hIngridient" Type="Self.hIngridient" Multiplicity="0..1" />
+          <End Role="jEntrancePosition" Type="Self.jEntrancePosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hIngridient">
+              <PropertyRef Name="IngridientId" />
+            </Principal>
+            <Dependent Role="jEntrancePosition">
+              <PropertyRef Name="IngridientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jMenu_hMenuId">
+          <End Role="hMenuId" Type="Self.hMenuId" Multiplicity="1" />
+          <End Role="jMenu" Type="Self.jMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hMenuId">
+              <PropertyRef Name="MenuId" />
+            </Principal>
+            <Dependent Role="jMenu">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jReceiptPosition_hMenuId">
+          <End Role="hMenuId" Type="Self.hMenuId" Multiplicity="1" />
+          <End Role="jReceiptPosition" Type="Self.jReceiptPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hMenuId">
+              <PropertyRef Name="MenuId" />
+            </Principal>
+            <Dependent Role="jReceiptPosition">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jReceipt_hPersonal">
+          <End Role="hPersonal" Type="Self.hPersonal" Multiplicity="1" />
+          <End Role="jReceipt" Type="Self.jReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hPersonal">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="jReceipt">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jReceiptPosition_jReceipt">
+          <End Role="jReceipt" Type="Self.jReceipt" Multiplicity="1" />
+          <End Role="jReceiptPosition" Type="Self.jReceiptPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="jReceipt">
+              <PropertyRef Name="ReceiptId" />
+            </Principal>
+            <Dependent Role="jReceiptPosition">
+              <PropertyRef Name="ReceiptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KOMK_v6Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="hCashBox" EntityType="Self.hCashBox" />
+          <EntitySet Name="hDish" EntityType="Self.hDish" />
+          <EntitySet Name="hDishComposition" EntityType="Self.hDishComposition" />
+          <EntitySet Name="hDishId" EntityType="Self.hDishId" />
+          <EntitySet Name="hIngridient" EntityType="Self.hIngridient" />
+          <EntitySet Name="hMenuId" EntityType="Self.hMenuId" />
+          <EntitySet Name="hPersonal" EntityType="Self.hPersonal" />
+          <EntitySet Name="jEntrancePosition" EntityType="Self.jEntrancePosition" />
+          <EntitySet Name="jMenu" EntityType="Self.jMenu" />
+          <EntitySet Name="jMenuComposition" EntityType="Self.jMenuComposition" />
+          <EntitySet Name="jReceipt" EntityType="Self.jReceipt" />
+          <EntitySet Name="jReceiptPosition" EntityType="Self.jReceiptPosition" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_jReceipt_hCashBox" Association="Self.FK_jReceipt_hCashBox">
+            <End Role="hCashBox" EntitySet="hCashBox" />
+            <End Role="jReceipt" EntitySet="jReceipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_hDish_hDishId" Association="Self.FK_hDish_hDishId">
+            <End Role="hDishId" EntitySet="hDishId" />
+            <End Role="hDish" EntitySet="hDish" />
+          </AssociationSet>
+          <AssociationSet Name="FK_hDish_hPersonal" Association="Self.FK_hDish_hPersonal">
+            <End Role="hPersonal" EntitySet="hPersonal" />
+            <End Role="hDish" EntitySet="hDish" />
+          </AssociationSet>
+          <AssociationSet Name="FK_hDishComposition_hDishId" Association="Self.FK_hDishComposition_hDishId">
+            <End Role="hDishId" EntitySet="hDishId" />
+            <End Role="hDishComposition" EntitySet="hDishComposition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_hDishComposition_hIngridientId" Association="Self.FK_hDishComposition_hIngridientId">
+            <End Role="hIngridient" EntitySet="hIngridient" />
+            <End Role="hDishComposition" EntitySet="hDishComposition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jMenu_hDishId" Association="Self.FK_jMenu_hDishId">
+            <End Role="hDishId" EntitySet="hDishId" />
+            <End Role="jMenu" EntitySet="jMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jMenuComposition_hDishId" Association="Self.FK_jMenuComposition_hDishId">
+            <End Role="hDishId" EntitySet="hDishId" />
+            <End Role="jMenuComposition" EntitySet="jMenuComposition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jReceiptPosition_hDishId" Association="Self.FK_jReceiptPosition_hDishId">
+            <End Role="hDishId" EntitySet="hDishId" />
+            <End Role="jReceiptPosition" EntitySet="jReceiptPosition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jEntrancePosition_hIngridientId" Association="Self.FK_jEntrancePosition_hIngridientId">
+            <End Role="hIngridient" EntitySet="hIngridient" />
+            <End Role="jEntrancePosition" EntitySet="jEntrancePosition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jMenu_hMenuId" Association="Self.FK_jMenu_hMenuId">
+            <End Role="hMenuId" EntitySet="hMenuId" />
+            <End Role="jMenu" EntitySet="jMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jReceiptPosition_hMenuId" Association="Self.FK_jReceiptPosition_hMenuId">
+            <End Role="hMenuId" EntitySet="hMenuId" />
+            <End Role="jReceiptPosition" EntitySet="jReceiptPosition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jReceipt_hPersonal" Association="Self.FK_jReceipt_hPersonal">
+            <End Role="hPersonal" EntitySet="hPersonal" />
+            <End Role="jReceipt" EntitySet="jReceipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jReceiptPosition_jReceipt" Association="Self.FK_jReceiptPosition_jReceipt">
+            <End Role="jReceipt" EntitySet="jReceipt" />
+            <End Role="jReceiptPosition" EntitySet="jReceiptPosition" />
+          </AssociationSet>
+          <FunctionImport Name="InshDish">
+            <Parameter Name="DishId" Mode="In" Type="Int32" />
+            <Parameter Name="DishName" Mode="In" Type="String" />
+            <Parameter Name="PersId" Mode="In" Type="Int32" />
+            <Parameter Name="DishDate" Mode="In" Type="DateTime" />
+            <Parameter Name="HrsAm" Mode="In" Type="Single" />
+          </FunctionImport>
+          <FunctionImport Name="InshDishComposition">
+            <Parameter Name="DishId" Mode="In" Type="Int32" />
+            <Parameter Name="IngId" Mode="In" Type="Int32" />
+            <Parameter Name="IngAm" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InshIngridient">
+            <Parameter Name="IngId" Mode="In" Type="Int32" />
+            <Parameter Name="IngName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InshMenuId">
+          <Parameter Name="MenuDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="InshPersonal">
+            <Parameter Name="PersFIN" Mode="In" Type="String" />
+            <Parameter Name="PersCost" Mode="In" Type="Decimal" />
+            <Parameter Name="PersDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="InsjEntrance">
+            <Parameter Name="EntCost" Mode="In" Type="Decimal" />
+            <Parameter Name="EntDT" Mode="In" Type="DateTime" />
+            <Parameter Name="IngId" Mode="In" Type="Int32" />
+            <Parameter Name="IngAm" Mode="In" Type="Int32" />
+            <Parameter Name="IngCost" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="InsjMenu">
+            <Parameter Name="MenuId" Mode="In" Type="Int32" />
+            <Parameter Name="DishId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsjMenuComposition">
+            <Parameter Name="DishId" Mode="In" Type="Int32" />
+            <Parameter Name="DishAm" Mode="In" Type="Int32" />
+            <Parameter Name="DishDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="InsjReceiptCashBox">
+            <Parameter Name="PersId" Mode="In" Type="Int32" />
+            <Parameter Name="CashBoxId" Mode="In" Type="Int32" />
+            <Parameter Name="SumAmount" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="InsReceiptPosition">
+            <Parameter Name="ReceiptId" Mode="In" Type="Int32" />
+            <Parameter Name="DishId" Mode="In" Type="Int32" />
+            <Parameter Name="DishAm" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(KOMK_v6Model.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(KOMK_v6Model.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище KOMK_v6ModelContainer" CdmEntityContainer="KOMK_v6Entities">
+          <EntitySetMapping Name="hCashBox">
+            <EntityTypeMapping TypeName="KOMK_v6Model.hCashBox">
+              <MappingFragment StoreEntitySet="hCashBox">
+                <ScalarProperty Name="CashBoxId" ColumnName="CashBoxId" />
+                <ScalarProperty Name="CashBoxModel" ColumnName="CashBoxModel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hDish">
+            <EntityTypeMapping TypeName="KOMK_v6Model.hDish">
+              <MappingFragment StoreEntitySet="hDish">
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="DishCreateDate" ColumnName="DishCreateDate" />
+                <ScalarProperty Name="HumanHoursAmount" ColumnName="HumanHoursAmount" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="DishCost" ColumnName="DishCost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hDishComposition">
+            <EntityTypeMapping TypeName="KOMK_v6Model.hDishComposition">
+              <MappingFragment StoreEntitySet="hDishComposition">
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="IngridientId" ColumnName="IngridientId" />
+                <ScalarProperty Name="IngridientAmount" ColumnName="IngridientAmount" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hDishId">
+            <EntityTypeMapping TypeName="KOMK_v6Model.hDishId">
+              <MappingFragment StoreEntitySet="hDishId">
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="DishName" ColumnName="DishName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hIngridient">
+            <EntityTypeMapping TypeName="KOMK_v6Model.hIngridient">
+              <MappingFragment StoreEntitySet="hIngridient">
+                <ScalarProperty Name="IngridientId" ColumnName="IngridientId" />
+                <ScalarProperty Name="IngridientName" ColumnName="IngridientName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hMenuId">
+            <EntityTypeMapping TypeName="KOMK_v6Model.hMenuId">
+              <MappingFragment StoreEntitySet="hMenuId">
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="MenuDate" ColumnName="MenuDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hPersonal">
+            <EntityTypeMapping TypeName="KOMK_v6Model.hPersonal">
+              <MappingFragment StoreEntitySet="hPersonal">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="PersonFlN" ColumnName="PersonFlN" />
+                <ScalarProperty Name="PersonCost1H" ColumnName="PersonCost1H" />
+                <ScalarProperty Name="PersonDate" ColumnName="PersonDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="jEntrancePosition">
+            <EntityTypeMapping TypeName="KOMK_v6Model.jEntrancePosition">
+              <MappingFragment StoreEntitySet="jEntrancePosition">
+                <ScalarProperty Name="EntranceId" ColumnName="EntranceId" />
+                <ScalarProperty Name="IngridientId" ColumnName="IngridientId" />
+                <ScalarProperty Name="IngridientCost" ColumnName="IngridientCost" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="EntranceDateTime" ColumnName="EntranceDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="jMenu">
+            <EntityTypeMapping TypeName="KOMK_v6Model.jMenu">
+              <MappingFragment StoreEntitySet="jMenu">
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="jMenuComposition">
+            <EntityTypeMapping TypeName="KOMK_v6Model.jMenuComposition">
+              <MappingFragment StoreEntitySet="jMenuComposition">
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="DishAmount" ColumnName="DishAmount" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="DishDate" ColumnName="DishDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="jReceipt">
+            <EntityTypeMapping TypeName="KOMK_v6Model.jReceipt">
+              <MappingFragment StoreEntitySet="jReceipt">
+                <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+                <ScalarProperty Name="ReceiptSumAmount" ColumnName="ReceiptSumAmount" />
+                <ScalarProperty Name="ReceiptCashBoxId" ColumnName="ReceiptCashBoxId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="ReceiptDateTime" ColumnName="ReceiptDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="jReceiptPosition">
+            <EntityTypeMapping TypeName="KOMK_v6Model.jReceiptPosition">
+              <MappingFragment StoreEntitySet="jReceiptPosition">
+                <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="DishAmount" ColumnName="DishAmount" />
+                <ScalarProperty Name="DishCost" ColumnName="DishCost" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="KOMK_v6Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="InshDish" FunctionName="Хранилище KOMK_v6Model.InshDish" />
+          <FunctionImportMapping FunctionImportName="InshDishComposition" FunctionName="Хранилище KOMK_v6Model.InshDishComposition" />
+          <FunctionImportMapping FunctionImportName="InshIngridient" FunctionName="Хранилище KOMK_v6Model.InshIngridient" />
+          <FunctionImportMapping FunctionImportName="InshMenuId" FunctionName="Хранилище KOMK_v6Model.InshMenuId" />
+          <FunctionImportMapping FunctionImportName="InshPersonal" FunctionName="Хранилище KOMK_v6Model.InshPersonal" />
+          <FunctionImportMapping FunctionImportName="InsjEntrance" FunctionName="Хранилище KOMK_v6Model.InsjEntrance" />
+          <FunctionImportMapping FunctionImportName="InsjMenu" FunctionName="Хранилище KOMK_v6Model.InsjMenu" />
+          <FunctionImportMapping FunctionImportName="InsjMenuComposition" FunctionName="Хранилище KOMK_v6Model.InsjMenuComposition" />
+          <FunctionImportMapping FunctionImportName="InsjReceiptCashBox" FunctionName="Хранилище KOMK_v6Model.InsjReceiptCashBox" />
+          <FunctionImportMapping FunctionImportName="InsReceiptPosition" FunctionName="Хранилище KOMK_v6Model.InsReceiptPosition" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище KOMK_v6Model.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище KOMK_v6Model.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище KOMK_v6Model.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище KOMK_v6Model.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KOMK_v6Model.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище KOMK_v6Model.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KOMK_v6Model.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище KOMK_v6Model.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище KOMK_v6Model.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
