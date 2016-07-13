@@ -1,0 +1,51 @@
+﻿@model WebApplication1.Models.hPersonal
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/hIngridients/Create.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>hPersonal</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonFlN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonFlN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonCost1H)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonCost1H)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Exist)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Exist)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PersonId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
