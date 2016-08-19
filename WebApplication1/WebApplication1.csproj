@@ -160,6 +160,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\hIngridientsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\hPersonalsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -289,6 +290,11 @@
     <Content Include="Views\hIngridients\Index.cshtml" />
     <Content Include="Views\Home\AddEntrance.cshtml" />
     <Content Include="Views\Home\Ingridient.cshtml" />
+    <Content Include="Views\hPersonals\Create.cshtml" />
+    <Content Include="Views\hPersonals\Delete.cshtml" />
+    <Content Include="Views\hPersonals\Details.cshtml" />
+    <Content Include="Views\hPersonals\Edit.cshtml" />
+    <Content Include="Views\hPersonals\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

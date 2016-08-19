@@ -10,108 +10,107 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    // it's test git!!!!!!!! :DDDDDDDDDDDD
-    public class hIngridientsController : Controller
+    public class hPersonalsController : Controller
     {
         private KOMK_v6Entities1 db = new KOMK_v6Entities1();
 
-        // GET: hIngridients
+        // GET: hPersonals
         public ActionResult Index()
         {
-            return View(db.hIngridient.ToList());
+            return View(db.hPersonal.ToList());
         }
 
-        // GET: hIngridients/Details/5
+        // GET: hPersonals/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            hIngridient hIngridient = db.hIngridient.Find(id);
-            if (hIngridient == null)
+            hPersonal hPersonal = db.hPersonal.Find(id);
+            if (hPersonal == null)
             {
                 return HttpNotFound();
             }
-            return View(hIngridient);
+            return View(hPersonal);
         }
 
-        // GET: hIngridients/Create
+        // GET: hPersonals/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: hIngridients/Create
+        // POST: hPersonals/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IngridientId,IngridientName,Exist")] hIngridient hIngridient)
+        public ActionResult Create([Bind(Include = "PersonId,PersonFlN,PersonCost1H,PersonDate,Exist")] hPersonal hPersonal)
         {
             if (ModelState.IsValid)
             {
-                db.hIngridient.Add(hIngridient);
+                db.hPersonal.Add(hPersonal);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(hIngridient);
+            return View(hPersonal);
         }
 
-        // GET: hIngridients/Edit/5
+        // GET: hPersonals/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            hIngridient hIngridient = db.hIngridient.Find(id);
-            if (hIngridient == null)
+            hPersonal hPersonal = db.hPersonal.Find(id);
+            if (hPersonal == null)
             {
                 return HttpNotFound();
             }
-            return View(hIngridient);
+            return View(hPersonal);
         }
 
-        // POST: hIngridients/Edit/5
+        // POST: hPersonals/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IngridientId,IngridientName,Exist")] hIngridient hIngridient)
+        public ActionResult Edit([Bind(Include = "PersonId,PersonFlN,PersonCost1H,PersonDate,Exist")] hPersonal hPersonal)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(hIngridient).State = EntityState.Modified;
+                db.Entry(hPersonal).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(hIngridient);
+            return View(hPersonal);
         }
 
-        // GET: hIngridients/Delete/5
+        // GET: hPersonals/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            hIngridient hIngridient = db.hIngridient.Find(id);
-            if (hIngridient == null)
+            hPersonal hPersonal = db.hPersonal.Find(id);
+            if (hPersonal == null)
             {
                 return HttpNotFound();
             }
-            return View(hIngridient);
+            return View(hPersonal);
         }
 
-        // POST: hIngridients/Delete/5
+        // POST: hPersonals/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            hIngridient hIngridient = db.hIngridient.Find(id);
-            db.hIngridient.Remove(hIngridient);
+            hPersonal hPersonal = db.hPersonal.Find(id);
+            db.hPersonal.Remove(hPersonal);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
